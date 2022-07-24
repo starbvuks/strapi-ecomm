@@ -5,9 +5,12 @@ export default function Home({ posts }) {
     <div className={styles.container}>
       {posts &&
         posts.data.map((post) => (
-          <div>
+          <div className={styles.blogs}>
             <h2>{post.attributes.Title}</h2>
-            <h3>{post.attributes.user.data.attributes.username}</h3>
+            <h3 className={styles.author}>
+              {post.attributes.user.data.attributes.username}
+            </h3>
+            <br></br>
           </div>
         ))}
     </div>
