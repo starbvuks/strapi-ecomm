@@ -38,11 +38,7 @@ export default function Home({ posts, flavors }) {
             ) : (
               <h2>Flavor: {currFlavor}</h2>
             )}
-            <h3 className={styles.author}>{post.attributes.price}</h3>
-            <h3 className={styles.author}>SKU: {post.attributes.SKU}</h3>
-            <h4 className={styles.author}>
-              Category: {post.attributes.category.data.attributes.title}
-            </h4>
+            <h3 className={styles.author}>Price: {post.attributes.price}</h3>
             <p>{post.attributes.description}</p>
             {flavors &&
               flavors.data.map((flavor) => (

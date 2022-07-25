@@ -49,6 +49,9 @@
       "relation": "manyToOne",
       "target": "api::flavor.flavor",
       "inversedBy": "products"
+    },
+    "slug": {
+      "type": "string"
     }
   }
 }
