@@ -43,6 +43,12 @@
     },
     "SKU": {
       "type": "string"
+    },
+    "flavor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::flavor.flavor",
+      "inversedBy": "products"
     }
   }
 }
