@@ -2,13 +2,15 @@ import { useState } from "react";
 import styles from "../styles/Home.module.css";
 
 export default function Home({ posts, flavors }) {
-  const [currFlavor, setCurrFlavor] = useState("Vanilla");
+  const [currFlavor, setCurrFlavor] = useState("Zero Sugar");
 
   function handleSubmit(id) {
-    fetch(`http://localhost:1337/api/flavors/${id}`)
+    fetch(`http://localhost:1337/api/flavors/${id}?populate=*`)
       .then((data) => data.json())
       .then((data) => setCurrFlavor(data))
       .catch((error) => console.log(error));
+
+    // console.log(currFlavor.data.attributes.image.data[0].attributes.url);
   }
 
   return (
@@ -17,12 +19,19 @@ export default function Home({ posts, flavors }) {
         posts.data.map((post) => (
           <div className={styles.blogs}>
             {post &&
-              post.attributes.image.data.map((pos) => (
-                <img
-                  style={{ maxWidth: "20%" }}
-                  src={`http://localhost:1337${pos.attributes.url}`}
-                />
-              ))}
+              post.attributes.image.data.map((pos) =>
+                currFlavor.data ? (
+                  <img
+                    style={{ maxWidth: "20%" }}
+                    src={`http://localhost:1337${currFlavor.data.attributes.image.data[0].attributes.url}`}
+                  />
+                ) : (
+                  <img
+                    style={{ maxWidth: "20%" }}
+                    src={`http://localhost:1337${pos.attributes.url}`}
+                  />
+                )
+              )}
             <h2>{post.attributes.title}</h2>
             {currFlavor.data ? (
               <h2>Flavor: {currFlavor.data.attributes.title}</h2>
