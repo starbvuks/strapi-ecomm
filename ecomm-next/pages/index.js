@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
 export default function Home({ posts, flavors }) {
@@ -32,7 +33,9 @@ export default function Home({ posts, flavors }) {
                   />
                 )
               )}
-            <h2>{post.attributes.title}</h2>
+            <Link href={`/${post.attributes.slug}`}>
+              <h2 style={{ cursor: "pointer" }}>{post.attributes.title}</h2>
+            </Link>
             {currFlavor.data ? (
               <h2>Flavor: {currFlavor.data.attributes.title}</h2>
             ) : (
