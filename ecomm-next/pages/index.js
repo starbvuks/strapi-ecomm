@@ -7,10 +7,8 @@ export default function Home({ posts, flavors }) {
   function handleSubmit(id) {
     fetch(`http://localhost:1337/api/flavors/${id}`)
       .then((data) => data.json())
-      .then((j) => setCurrFlavor(j))
+      .then((data) => setCurrFlavor(data))
       .catch((error) => console.log(error));
-
-    console.log(currFlavor.data.attributes.title);
   }
 
   return (
@@ -26,7 +24,11 @@ export default function Home({ posts, flavors }) {
                 />
               ))}
             <h2>{post.attributes.title}</h2>
-            <h2>Flavor: {currFlavor.data.attributes.title}</h2>
+            {currFlavor.data ? (
+              <h2>Flavor: {currFlavor.data.attributes.title}</h2>
+            ) : (
+              <h2>Flavor: {currFlavor}</h2>
+            )}
             <h3 className={styles.author}>{post.attributes.price}</h3>
             <h3 className={styles.author}>SKU: {post.attributes.SKU}</h3>
             <h4 className={styles.author}>
